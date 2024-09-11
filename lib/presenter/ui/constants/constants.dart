@@ -11,11 +11,16 @@ sealed class ColorsConstants {
 }
 
 sealed class FontConstants {
-  static const fontFamily = 'Metronic Pro';
+  static const fontFamily = 'LifeSavers';
 }
 
 sealed class ImageConstants {
-  static const starLogo = 'assets/images/blue_logo.png';
-  static const orangeBg = 'assets/images/bottom_logo.png';
-  static const whiteBg = 'assets/images/dog_bath.png';
+  static const starLogoSmiling = 'assets/images/famplay_logo.png';
+  static const starLogo = 'assets/images/famplay_logo_2.png';
+  static const orangeBg = 'assets/images/orange_bg.png';
+  static const whiteBg = 'assets/images/white_bg.png';
+  static const filhos = 'assets/images/icon_filho.png';
+  static const premios = 'assets/images/icon_premio.png';
+  static const tarefas = 'assets/images/icon_tarefa.png';
+  static const validar = 'assets/images/icon_validar.png';
 }

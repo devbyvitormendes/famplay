@@ -1,6 +1,6 @@
 {
-    "name": "farmplay",
-    "short_name": "farmplay",
+    "name": "famplay",
+    "short_name": "famplay",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

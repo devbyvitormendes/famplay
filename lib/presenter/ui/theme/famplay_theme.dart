@@ -1,7 +1,7 @@
-import 'package:farmplay/presenter/ui/constants/constants.dart';
+import 'package:famplay/presenter/ui/constants/constants.dart';
 import 'package:flutter/material.dart';
 
-sealed class FarmplayTheme {
+sealed class FamplayTheme {
   static const _defaultInputBorder = OutlineInputBorder(
     borderRadius: BorderRadius.all(
       Radius.circular(8),
@@ -53,12 +53,12 @@ sealed class FarmplayTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        foregroundColor: ColorsConstants.brown,
-        backgroundColor: ColorsConstants.white,
+        foregroundColor: ColorsConstants.white,
+        backgroundColor: ColorsConstants.brown,
         textStyle: const TextStyle(
           fontFamily: FontConstants.fontFamily,
           color: ColorsConstants.white,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w900,
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
@@ -71,7 +71,7 @@ sealed class FarmplayTheme {
           color: ColorsConstants.white,
           width: 1,
         ),
-        foregroundColor: ColorsConstants.wine,
+        foregroundColor: ColorsConstants.brown,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),

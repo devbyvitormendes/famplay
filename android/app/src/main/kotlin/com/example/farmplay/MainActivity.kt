@@ -1,4 +1,4 @@
-package com.example.farmplay
+package com.example.famplay
 
 import io.flutter.embedding.android.FlutterActivity
 

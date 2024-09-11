@@ -1,19 +1,24 @@
-import 'package:farmplay/presenter/ui/theme/farmplay_theme.dart';
+import 'package:famplay/presenter/ui/famplay_nav_global_key.dart';
+import 'package:famplay/presenter/ui/pages/login_page.dart';
+import 'package:famplay/presenter/ui/pages/menu_page.dart';
+import 'package:famplay/presenter/ui/pages/splash_page.dart';
+import 'package:famplay/presenter/ui/theme/famplay_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
     
-class FarmplayApp extends StatelessWidget {
-  const FarmplayApp({ super.key });
+class FamplayApp extends StatelessWidget {
+  const FamplayApp({ super.key });
   
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'FamPlay',
-          theme: FarmplayTheme.themeData,
-          navigatorKey: PetshopNavGlobalKey.instance.navKey,
+      title: 'FAMPLAY',
+          theme: FamplayTheme.themeData,
+          navigatorKey: FamplayNavGlobalKey.instance.navKey,
           routes: {
             '/': (_) => const SplashPage(),
             '/auth/login': (_) => const LoginPage(),
-            '/auth/register/user': (_) => const UserRegisterPage(),
+            // '/auth/register/user': (_) => const UserRegisterPage(),
             '/home': (_) => const MenuPage(),
             // '/unities': (_) => const UnitiesPage(),
             // '/schedule': (_) => const SchedulePage(),
