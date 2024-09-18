@@ -30,7 +30,11 @@ class _SplashPageState extends State<SplashPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-            child: Image.asset(ImageConstants.starLogo),
+            child: Image.asset(
+              ImageConstants.starLogoSmiling,
+              height: 200,
+              width: 200,
+            ),
           ),
           const SizedBox(height: 20),
           const Center(

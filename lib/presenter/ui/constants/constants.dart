@@ -15,8 +15,8 @@ sealed class FontConstants {
 }
 
 sealed class ImageConstants {
-  static const starLogoSmiling = 'assets/images/famplay_logo.png';
-  static const starLogo = 'assets/images/famplay_logo_2.png';
+  static const starLogoSmiling = 'assets/images/famplay_splash.png';
+  static const starLogo = 'assets/images/famplay_logo.png';
   static const orangeBg = 'assets/images/orange_bg.png';
   static const whiteBg = 'assets/images/white_bg.png';
   static const filhos = 'assets/images/icon_filho.png';
