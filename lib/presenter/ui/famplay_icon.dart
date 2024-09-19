@@ -8,8 +8,11 @@ class FamplayIcons {
   static const ImageIcon tarefas = ImageIcon(AssetImage('assets/images/icon_tarefa.png'));
   static const ImageIcon validar = ImageIcon(AssetImage('assets/images/icon_validar.png'));
 
-  //messages
+  //icons
+  static const IconData camera = FontAwesomeIcons.camera;
   static const IconData error = FontAwesomeIcons.circleExclamation;
+  static const IconData eye = FontAwesomeIcons.eye;
+  static const IconData eyeSlash = FontAwesomeIcons.eyeSlash;
   static const IconData info = FontAwesomeIcons.circleInfo;
   static const IconData logout = FontAwesomeIcons.doorOpen;
   static const IconData success = FontAwesomeIcons.circleCheck;

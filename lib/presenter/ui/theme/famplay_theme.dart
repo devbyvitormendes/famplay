@@ -32,7 +32,7 @@ sealed class FamplayTheme {
       iconTheme: IconThemeData(color: ColorsConstants.white),
       backgroundColor: ColorsConstants.orange,
       titleTextStyle: TextStyle(
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w900,
         fontSize: 18,
         color: ColorsConstants.white,
         fontFamily: FontConstants.fontFamily,
@@ -43,6 +43,7 @@ sealed class FamplayTheme {
       fillColor: ColorsConstants.white,
       labelStyle: const TextStyle(
         color: ColorsConstants.white,
+        fontWeight: FontWeight.w900,
       ),
       border: _defaultInputBorder,
       enabledBorder: _defaultInputBorder,
