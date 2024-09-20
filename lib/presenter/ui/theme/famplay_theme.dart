@@ -23,14 +23,12 @@ sealed class FamplayTheme {
       background: ColorsConstants.orange,
       onBackground: ColorsConstants.white,
       surface: ColorsConstants.white,
-      onSurface: ColorsConstants.orange,
+      onSurface: ColorsConstants.white,
     ),
-    scaffoldBackgroundColor: ColorsConstants.orange,
     useMaterial3: true,
     appBarTheme: const AppBarTheme(
       centerTitle: true,
       iconTheme: IconThemeData(color: ColorsConstants.white),
-      backgroundColor: ColorsConstants.orange,
       titleTextStyle: TextStyle(
         fontWeight: FontWeight.w900,
         fontSize: 18,
@@ -60,6 +58,7 @@ sealed class FamplayTheme {
           fontFamily: FontConstants.fontFamily,
           color: ColorsConstants.white,
           fontWeight: FontWeight.w900,
+          fontSize: 18,
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
@@ -70,11 +69,17 @@ sealed class FamplayTheme {
       style: OutlinedButton.styleFrom(
         side: const BorderSide(
           color: ColorsConstants.white,
-          width: 1,
+          width: 2,
         ),
-        foregroundColor: ColorsConstants.brown,
+        foregroundColor: ColorsConstants.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
+        ),
+        textStyle: const TextStyle(
+          fontFamily: FontConstants.fontFamily,
+          color: ColorsConstants.white,
+          fontWeight: FontWeight.w900,
+          fontSize: 18,
         ),
       ),
     ),

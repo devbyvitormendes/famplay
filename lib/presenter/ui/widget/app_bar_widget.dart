@@ -3,7 +3,7 @@ import 'package:famplay/presenter/ui/famplay_icon.dart';
 import 'package:flutter/material.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
-  final Image image;
+  final Image? image;
   final String title;
   final bool showBack;
   final bool showLogoff;
@@ -12,7 +12,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
 
   const AppBarWidget({
     super.key,
-    required this.image,
+    this.image,
     required this.title,
     required this.showBack,
     required this.showLogoff,
@@ -27,24 +27,33 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: showBack
-          ? const EdgeInsets.only(right: 15)
+          ? const EdgeInsets.only(right: 10)
           : const EdgeInsets.only(left: 10, right: 10),
       child: Column(
         children: [
           AppBar(
+            surfaceTintColor: Colors.transparent,
             backgroundColor: backgroundColor,
             automaticallyImplyLeading: showBack,
             title: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image(
-                  image: image.image,
-                  color: color,
-                  width: 22,
-                  height: 22,
-                ),
-                const SizedBox(
-                  width: 15,
+                Visibility(
+                  visible: image != null,
+                  child: Row(
+                    children: [
+                      if (image != null)
+                        Image(
+                          image: image!.image,
+                          color: color,
+                          width: 22,
+                          height: 22,
+                        ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                    ],
+                  ),
                 ),
                 Text(
                   title,

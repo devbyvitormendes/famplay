@@ -36,15 +36,15 @@ class _MenuPageState extends State<MenuPage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: ColorsConstants.yellow,
-        unselectedItemColor: ColorsConstants.wine,
-        selectedItemColor: ColorsConstants.blue,
+        unselectedItemColor: ColorsConstants.brown,
+        selectedItemColor: ColorsConstants.orange,
         currentIndex: _selectedIndex,
         selectedLabelStyle: const TextStyle(
-          color: ColorsConstants.blue,
+          color: ColorsConstants.orange,
           fontWeight: FontWeight.w900,
         ),
         unselectedLabelStyle: const TextStyle(
-          color: ColorsConstants.wine,
+          color: ColorsConstants.brown,
           fontWeight: FontWeight.w900,
         ),
         onTap: _onItemTapped,

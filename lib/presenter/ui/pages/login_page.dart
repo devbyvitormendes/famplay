@@ -166,7 +166,7 @@ class _LoginPageState extends State<LoginPage> {
                                     }
                                   },
                                   child: const Text(
-                                    'ENTRAR',
+                                    'Entrar',
                                     style: TextStyle(
                                       color: ColorsConstants.white,
                                       fontWeight: FontWeight.w900,
@@ -189,7 +189,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: const Text(
                             'Nova conta',
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 18,
                               color: ColorsConstants.white,
                               fontWeight: FontWeight.w900,
                             ),

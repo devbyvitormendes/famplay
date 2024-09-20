@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:famplay/domain/model/userModel/user_fields.dart';
-import 'package:famplay/domain/model/userModel/user_model.dart';
+import 'package:famplay/domain/model/user/user_fields.dart';
+import 'package:famplay/domain/model/user/user_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 class UserDatabaseHelper {

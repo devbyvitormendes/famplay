@@ -1,5 +1,5 @@
-import 'package:famplay/domain/model/userModel/profile.dart';
-import 'package:famplay/domain/model/userModel/user_fields.dart';
+import 'package:famplay/domain/model/user/profile.dart';
+import 'package:famplay/domain/model/user/user_fields.dart';
 
 class UserModel {
   final int id;

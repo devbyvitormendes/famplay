@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 
@@ -8,16 +9,18 @@ import 'package:famplay/presenter/ui/famplay_icon.dart';
 import 'package:famplay/presenter/ui/widget/app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:validatorless/validatorless.dart';
 
-class UserRegisterPage extends StatefulWidget {
-  const UserRegisterPage({super.key});
+class SonRegisterPage extends StatefulWidget {
+  const SonRegisterPage({super.key});
 
   @override
-  State<UserRegisterPage> createState() => _UserRegisterPageState();
+  State<SonRegisterPage> createState() => _SonRegisterPageState();
 }
 
-class _UserRegisterPageState extends State<UserRegisterPage> {
+class _SonRegisterPageState extends State<SonRegisterPage> {
+  bool isCreate = true;
   final formKey = GlobalKey<FormState>();
   final nameEC = TextEditingController();
   final userEC = TextEditingController();
@@ -25,22 +28,46 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
   File? picture;
   bool obscuredText = true;
 
+  final List<String> _items = [];
+  final StreamController<String> _controller =
+      StreamController<String>.broadcast();
+
   @override
   void initState() {
     super.initState();
+    _controller.stream.listen((item) {
+      setState(() {
+        _items.add(item);
+      });
+    });
   }
 
   @override
   void dispose() {
+    _controller.close();
     super.dispose();
+  }
+
+  Future pickImage() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (image == null) return;
+      final imageTemp = File(image.path);
+      setState(() => picture = imageTemp);
+    } on PlatformException catch (e) {
+      log('Failed to pick image: $e');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
+    isCreate = arguments['isCreate'];
+    
     return Scaffold(
       backgroundColor: ColorsConstants.orange,
       appBar: const AppBarWidget(
-        title: 'Nova conta',
+        title: 'Voltar',
         showBack: true,
         showLogoff: false,
         color: ColorsConstants.white,
@@ -64,6 +91,35 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Center(
+                    child: InkWell(
+                      onTap: pickImage,
+                      child: CircleAvatar(
+                        radius: 50.0,
+                        backgroundColor: ColorsConstants.white,
+                        child: Center(
+                          child: picture == null
+                              ? const CircleAvatar(
+                                  radius: 50.0,
+                                  backgroundColor: ColorsConstants.white,
+                                  child: Icon(
+                                    FamplayIcons.camera,
+                                    size: 40,
+                                    color: ColorsConstants.wine,
+                                  ),
+                                )
+                              : CircleAvatar(
+                                  radius: 50.0,
+                                  backgroundImage: FileImage(picture!),
+                                  backgroundColor: ColorsConstants.white,
+                                ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
                   const Text(
                     'Nome',
                     style: TextStyle(
@@ -190,24 +246,69 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
                   const SizedBox(
                     height: 60,
                   ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: const Size.fromHeight(56),
+                  Visibility(
+                    visible: isCreate,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size.fromHeight(56),
+                      ),
+                      onPressed: () {
+                        switch (formKey.currentState?.validate()) {
+                          case (false || null):
+                            Messages.showError(
+                              'Existem campos inválidos',
+                              context,
+                            );
+                          case true:
+                            log("Cadastrou");
+                          // login(emailEC.text, passwordEC.text);
+                        }
+                      },
+                      child: const Text(
+                        'Salvar',
+                      ),
                     ),
-                    onPressed: () {
-                      switch (formKey.currentState?.validate()) {
-                        case (false || null):
-                          Messages.showError(
-                            'Existem campos inválidos',
-                            context,
-                          );
-                        case true:
-                          log("Cadastrou");
-                        // login(emailEC.text, passwordEC.text);
-                      }
-                    },
-                    child: const Text(
-                      'Salvar',
+                  ),
+                  Visibility(
+                    visible: !isCreate,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          child: OutlinedButton(
+                            onPressed: () {
+                              log("Excluiu");
+                            },
+                            child: const Text(
+                              'Excluir',
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 24,
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              switch (formKey.currentState?.validate()) {
+                                case (false || null):
+                                  Messages.showError(
+                                    'Existem campos inválidos',
+                                    context,
+                                  );
+                                case true:
+                                  log("Cadastrou");
+                                // login(emailEC.text, passwordEC.text);
+                              }
+                            },
+                            child: const Text(
+                              'Salvar',
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

@@ -1,30 +1,28 @@
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:famplay/domain/helper/form_helper.dart';
 import 'package:famplay/domain/helper/messages.dart';
+import 'package:famplay/domain/model/prize/prize_model.dart';
 import 'package:famplay/presenter/ui/constants/constants.dart';
-import 'package:famplay/presenter/ui/famplay_icon.dart';
 import 'package:famplay/presenter/ui/widget/app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:validatorless/validatorless.dart';
 
-class UserRegisterPage extends StatefulWidget {
-  const UserRegisterPage({super.key});
+class PrizeRegisterPage extends StatefulWidget {
+  const PrizeRegisterPage({super.key});
 
   @override
-  State<UserRegisterPage> createState() => _UserRegisterPageState();
+  State<PrizeRegisterPage> createState() => _PrizeRegisterPageState();
 }
 
-class _UserRegisterPageState extends State<UserRegisterPage> {
+class _PrizeRegisterPageState extends State<PrizeRegisterPage> {
+  PrizeModel? prize;
+  bool isCreate = true;
   final formKey = GlobalKey<FormState>();
-  final nameEC = TextEditingController();
-  final userEC = TextEditingController();
-  final passwordEC = TextEditingController();
-  File? picture;
-  bool obscuredText = true;
-
+  final prizeEC = TextEditingController();
+  final costEC = TextEditingController();
+  
   @override
   void initState() {
     super.initState();
@@ -37,10 +35,14 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
+    prize = arguments['prize'];
+    isCreate = arguments['isCreate'];
+    
     return Scaffold(
       backgroundColor: ColorsConstants.orange,
       appBar: const AppBarWidget(
-        title: 'Nova conta',
+        title: 'Voltar',
         showBack: true,
         showLogoff: false,
         color: ColorsConstants.white,
@@ -65,7 +67,7 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Nome',
+                    'Prêmio',
                     style: TextStyle(
                       color: ColorsConstants.white,
                       fontWeight: FontWeight.w900,
@@ -84,17 +86,17 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
                     ],
                     onTapOutside: (_) => unfocus(context),
                     validator: Validatorless.multiple([
-                      Validatorless.required('Nome é obrigatório'),
+                      Validatorless.required('Prêmio é obrigatório'),
                       Validatorless.regex(
-                          RegExp(r"[A-Za-z]",
+                          RegExp(r"[A-Za-z0-9]",
                               multiLine: true,
                               caseSensitive: false,
                               dotAll: true),
-                          'Nome inválido, favor preencher corretamente.'),
+                          'Prêmio inválido, favor preencher corretamente.'),
                     ]),
-                    controller: nameEC,
+                    controller: prizeEC,
                     decoration: const InputDecoration(
-                      hintText: 'Digite o nome',
+                      hintText: 'Digite o prêmio',
                       floatingLabelBehavior: FloatingLabelBehavior.never,
                       hintStyle: TextStyle(
                         color: ColorsConstants.wine,
@@ -111,7 +113,7 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
                     height: 16,
                   ),
                   const Text(
-                    'Nome de Usuário',
+                    'Preço para Resgatar',
                     style: TextStyle(
                       color: ColorsConstants.white,
                       fontWeight: FontWeight.w900,
@@ -122,19 +124,26 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
                       color: ColorsConstants.brown,
                       fontWeight: FontWeight.w900,
                     ),
+                    keyboardType: TextInputType.text,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.deny(
+                        RegExp(r'[A-Za-z!@#$%^&*(),.?":{}|<>_+=\\/;]'),
+                      ),
+                    ],
                     onTapOutside: (_) => unfocus(context),
                     validator: Validatorless.multiple([
-                      Validatorless.required('Nome de Usuário é obrigatório'),
-                      Validatorless.min(4,
-                          'Nome de Usuário deve ter pelo menos 4 caracteres'),
+                      Validatorless.required('Prêmio é obrigatório'),
+                      Validatorless.number('Preço deve ser numérico'),
                     ]),
-                    controller: userEC,
+                    controller: costEC,
                     decoration: const InputDecoration(
-                      hintText: 'Digite o nome de usuário',
+                      hintText: 'Digite o preço para resgatar',
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
                       hintStyle: TextStyle(
                         color: ColorsConstants.wine,
                         fontWeight: FontWeight.w900,
                       ),
+                      errorMaxLines: 2,
                       errorStyle: TextStyle(
                         color: ColorsConstants.yellow,
                         fontWeight: FontWeight.w900,
@@ -142,72 +151,71 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
                     ),
                   ),
                   const SizedBox(
-                    height: 16,
-                  ),
-                  const Text(
-                    'Senha',
-                    style: TextStyle(
-                      color: ColorsConstants.white,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                  TextFormField(
-                    obscureText: obscuredText,
-                    style: const TextStyle(
-                      color: ColorsConstants.brown,
-                      fontWeight: FontWeight.w900,
-                    ),
-                    onTapOutside: (_) => unfocus(context),
-                    validator: Validatorless.required('Senha é obrigatória'),
-                    controller: passwordEC,
-                    decoration: InputDecoration(
-                      hintText: 'Digite a senha',
-                      hintStyle: const TextStyle(
-                        color: ColorsConstants.wine,
-                        fontWeight: FontWeight.w900,
-                      ),
-                      errorStyle: const TextStyle(
-                        color: ColorsConstants.yellow,
-                        fontWeight: FontWeight.w900,
-                      ),
-                      suffixIcon: IconButton(
-                        padding: const EdgeInsets.only(right: 10),
-                        icon: Icon(
-                          obscuredText
-                              ? FamplayIcons.eye
-                              : FamplayIcons.eyeSlash,
-                          color: ColorsConstants.wine,
-                          size: 20,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            obscuredText = !obscuredText;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
                     height: 60,
                   ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: const Size.fromHeight(56),
+                  Visibility(
+                    visible: isCreate,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size.fromHeight(56),
+                      ),
+                      onPressed: () {
+                        switch (formKey.currentState?.validate()) {
+                          case (false || null):
+                            Messages.showError(
+                              'Existem campos inválidos',
+                              context,
+                            );
+                          case true:
+                            log("Cadastrou");
+                          // login(emailEC.text, passwordEC.text);
+                        }
+                      },
+                      child: const Text(
+                        'Salvar',
+                      ),
                     ),
-                    onPressed: () {
-                      switch (formKey.currentState?.validate()) {
-                        case (false || null):
-                          Messages.showError(
-                            'Existem campos inválidos',
-                            context,
-                          );
-                        case true:
-                          log("Cadastrou");
-                        // login(emailEC.text, passwordEC.text);
-                      }
-                    },
-                    child: const Text(
-                      'Salvar',
+                  ),
+                  Visibility(
+                    visible: !isCreate,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          child: OutlinedButton(
+                            onPressed: () {
+                              log("Excluiu");
+                            },
+                            child: const Text(
+                              'Excluir',
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 24,
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              switch (formKey.currentState?.validate()) {
+                                case (false || null):
+                                  Messages.showError(
+                                    'Existem campos inválidos',
+                                    context,
+                                  );
+                                case true:
+                                  log("Cadastrou");
+                                // login(emailEC.text, passwordEC.text);
+                              }
+                            },
+                            child: const Text(
+                              'Salvar',
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

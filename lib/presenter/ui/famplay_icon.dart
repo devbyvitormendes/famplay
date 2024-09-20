@@ -9,6 +9,7 @@ class FamplayIcons {
   static const ImageIcon validar = ImageIcon(AssetImage('assets/images/icon_validar.png'));
 
   //icons
+  static const IconData add = FontAwesomeIcons.plus;
   static const IconData camera = FontAwesomeIcons.camera;
   static const IconData error = FontAwesomeIcons.circleExclamation;
   static const IconData eye = FontAwesomeIcons.eye;
@@ -16,5 +17,6 @@ class FamplayIcons {
   static const IconData info = FontAwesomeIcons.circleInfo;
   static const IconData logout = FontAwesomeIcons.doorOpen;
   static const IconData success = FontAwesomeIcons.circleCheck;
+  static const IconData trash = FontAwesomeIcons.trashCan;
   static const IconData warning = FontAwesomeIcons.triangleExclamation;
 }
