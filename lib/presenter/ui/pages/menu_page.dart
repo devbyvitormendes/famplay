@@ -4,7 +4,7 @@ import 'package:famplay/presenter/ui/pages/home_page.dart';
 import 'package:famplay/presenter/ui/pages/prize_page.dart';
 import 'package:famplay/presenter/ui/pages/task_page.dart';
 import 'package:famplay/presenter/ui/pages/validate_page.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -14,7 +14,6 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
-  int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     TaskPage(),
@@ -22,34 +21,14 @@ class _MenuPageState extends State<MenuPage> {
     ValidatePage(),
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
+    return CupertinoTabScaffold(
+      tabBar: CupertinoTabBar(
         backgroundColor: ColorsConstants.yellow,
-        unselectedItemColor: ColorsConstants.brown,
-        selectedItemColor: ColorsConstants.orange,
-        currentIndex: _selectedIndex,
-        selectedLabelStyle: const TextStyle(
-          color: ColorsConstants.orange,
-          fontWeight: FontWeight.w900,
-        ),
-        unselectedLabelStyle: const TextStyle(
-          color: ColorsConstants.brown,
-          fontWeight: FontWeight.w900,
-        ),
-        onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
+        activeColor: ColorsConstants.orange,
+        inactiveColor: ColorsConstants.brown,
+        items: const [
           BottomNavigationBarItem(
             icon: FamplayIcons.filhos,
             label: 'Filhos',
@@ -60,7 +39,7 @@ class _MenuPageState extends State<MenuPage> {
           ),
           BottomNavigationBarItem(
             icon: FamplayIcons.premios,
-            label: 'Prêmios',
+            label: 'Prósitos',
           ),
           BottomNavigationBarItem(
             icon: FamplayIcons.validar,
@@ -68,6 +47,11 @@ class _MenuPageState extends State<MenuPage> {
           ),
         ],
       ),
+      tabBuilder: (context, index) {
+        return CupertinoTabView(builder: (context) {
+          return _widgetOptions.elementAt(index);
+        });
+      },
     );
   }
 }

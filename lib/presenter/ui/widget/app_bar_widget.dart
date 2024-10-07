@@ -35,6 +35,9 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
             surfaceTintColor: Colors.transparent,
             backgroundColor: backgroundColor,
             automaticallyImplyLeading: showBack,
+            iconTheme: IconThemeData(
+              color: color,
+            ),
             title: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

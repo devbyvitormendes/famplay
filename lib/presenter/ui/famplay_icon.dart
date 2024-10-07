@@ -10,6 +10,7 @@ class FamplayIcons {
 
   //icons
   static const IconData add = FontAwesomeIcons.plus;
+  static const IconData calendar = FontAwesomeIcons.calendar;
   static const IconData camera = FontAwesomeIcons.camera;
   static const IconData error = FontAwesomeIcons.circleExclamation;
   static const IconData eye = FontAwesomeIcons.eye;
@@ -18,5 +19,6 @@ class FamplayIcons {
   static const IconData logout = FontAwesomeIcons.doorOpen;
   static const IconData success = FontAwesomeIcons.circleCheck;
   static const IconData trash = FontAwesomeIcons.trashCan;
+  static const IconData undone = FontAwesomeIcons.circleXmark;
   static const IconData warning = FontAwesomeIcons.triangleExclamation;
 }

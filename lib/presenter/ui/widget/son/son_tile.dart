@@ -1,23 +1,35 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:famplay/domain/model/user/user_model.dart';
 import 'package:famplay/presenter/ui/constants/constants.dart';
+import 'package:famplay/presenter/ui/pages/validate_tasks.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SonTile extends StatelessWidget {
   final UserModel user;
+  final bool validate;
 
   const SonTile({
     super.key,
     required this.user,
+    required this.validate,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        log('son: $user');
+        if (validate) {
+          Navigator.of(context).push(
+            CupertinoPageRoute(
+              builder: (context) => const ValidateTasksPage(),
+              settings: RouteSettings(
+                arguments: user,
+              ),
+            ),
+          );
+        }
       },
       child: Row(
         children: [
@@ -36,8 +48,11 @@ class SonTile extends StatelessWidget {
                     child: Center(
                       child: CircleAvatar(
                         radius: 50.0,
-                        backgroundImage:
-                            Image.memory(base64Decode(user.image)).image,
+                        backgroundImage: user.image == ''
+                            ? Image.memory(
+                                    base64Decode(ImageConstants.defaultImage))
+                                .image
+                            : Image.memory(base64Decode(user.image)).image,
                         backgroundColor: ColorsConstants.white,
                       ),
                     ),

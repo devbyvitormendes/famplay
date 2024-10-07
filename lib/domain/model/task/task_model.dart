@@ -6,6 +6,7 @@ class TaskModel {
   final int points;
   bool weekdays;
   bool weekends;
+  bool done;
 
   TaskModel({
     required this.id,
@@ -13,6 +14,7 @@ class TaskModel {
     required this.points,
     required this.weekdays,
     required this.weekends,
+    required this.done,
   });
 
   factory TaskModel.fromJson(Map<String, dynamic> json) => TaskModel(
@@ -21,6 +23,7 @@ class TaskModel {
         points: json['points'],
         weekdays: json['weekdays'],
         weekends: json['weekends'],
+        done: json['done'],
       );
 
   Map<String, Object?> toJson() => {
@@ -37,6 +40,7 @@ class TaskModel {
     int? points,
     bool? weekdays,
     bool? weekends,
+    bool? done,
   }) =>
       TaskModel(
         id: id ?? this.id,
@@ -44,6 +48,7 @@ class TaskModel {
         points: points ?? this.points,
         weekdays: weekdays ?? this.weekdays,
         weekends: weekends ?? this.weekends,
+        done: done ?? this.done,
       );
 }
 

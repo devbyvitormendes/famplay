@@ -50,6 +50,7 @@ class _TaskPageState extends State<TaskPage> {
           points: points,
           weekdays: weekdays,
           weekends: weekends,
+          done: false,
         ),
       );
     });

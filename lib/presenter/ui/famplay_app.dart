@@ -6,6 +6,7 @@ import 'package:famplay/presenter/ui/pages/splash_page.dart';
 import 'package:famplay/presenter/ui/pages/son_register_page.dart';
 import 'package:famplay/presenter/ui/pages/task_register_page.dart';
 import 'package:famplay/presenter/ui/pages/user_register_page.dart';
+import 'package:famplay/presenter/ui/pages/validate_tasks.dart';
 import 'package:famplay/presenter/ui/theme/famplay_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -27,6 +28,7 @@ class FamplayApp extends StatelessWidget {
             '/register/son': (_) => const SonRegisterPage(),
             '/register/task': (_) => const TaskRegisterPage(),
             '/register/prize': (_) => const PrizeRegisterPage(),
+            '/validate': (_) => const ValidateTasksPage(),
           },
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,

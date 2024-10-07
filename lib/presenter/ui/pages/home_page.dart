@@ -103,6 +103,7 @@ class _HomePageState extends State<HomePage> {
                       Expanded(
                         child: SonTile(
                           user: son,
+                          validate: false,
                         ),
                       ),
                       IconButton(

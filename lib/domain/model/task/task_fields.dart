@@ -8,6 +8,7 @@ class TaskFields {
   static const String points = 'points';
   static const String weekdays = 'weekdays';
   static const String weekends = 'weekends';
+  static const String done = 'done';
  
   static const List<String> values = [
     id,
@@ -15,5 +16,6 @@ class TaskFields {
     points,
     weekdays,
     weekends,
+    done,
   ];
 }
