@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:famplay/domain/helper/form_helper.dart';
 import 'package:famplay/domain/helper/messages.dart';
 import 'package:famplay/presenter/ui/constants/constants.dart';
@@ -161,7 +159,6 @@ class _LoginPageState extends State<LoginPage> {
                                       case true:
                                         Navigator.of(context)
                                             .pushNamed('/home');
-                                        log("Login: $emailEC, $passwordEC");
                                       // login(emailEC.text, passwordEC.text);
                                     }
                                   },

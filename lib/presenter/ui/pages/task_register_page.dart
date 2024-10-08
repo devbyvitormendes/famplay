@@ -10,7 +10,9 @@ import 'package:flutter/services.dart';
 import 'package:validatorless/validatorless.dart';
 
 class TaskRegisterPage extends StatefulWidget {
-  const TaskRegisterPage({super.key});
+  final bool isCreate;
+  final TaskModel? task;
+  const TaskRegisterPage({super.key, required this.isCreate, this.task});
 
   @override
   State<TaskRegisterPage> createState() => _TaskRegisterPageState();
@@ -25,6 +27,8 @@ class _TaskRegisterPageState extends State<TaskRegisterPage> {
   @override
   void initState() {
     super.initState();
+    isCreate = widget.isCreate;
+    task = widget.task;
   }
 
   @override
@@ -34,11 +38,6 @@ class _TaskRegisterPageState extends State<TaskRegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    final arguments = (ModalRoute.of(context)?.settings.arguments ??
-        <String, dynamic>{}) as Map;
-    task = arguments['task'];
-    isCreate = arguments['isCreate'];
-
     return Scaffold(
       backgroundColor: ColorsConstants.orange,
       appBar: const AppBarWidget(

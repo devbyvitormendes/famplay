@@ -10,7 +10,9 @@ import 'package:flutter/services.dart';
 import 'package:validatorless/validatorless.dart';
 
 class PrizeRegisterPage extends StatefulWidget {
-  const PrizeRegisterPage({super.key});
+  final bool isCreate;
+  final PrizeModel? prize;
+  const PrizeRegisterPage({super.key, required this.isCreate, this.prize});
 
   @override
   State<PrizeRegisterPage> createState() => _PrizeRegisterPageState();
@@ -26,6 +28,8 @@ class _PrizeRegisterPageState extends State<PrizeRegisterPage> {
   @override
   void initState() {
     super.initState();
+    isCreate = widget.isCreate;
+    prize = widget.prize;
   }
 
   @override
@@ -35,10 +39,6 @@ class _PrizeRegisterPageState extends State<PrizeRegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    final arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
-    prize = arguments['prize'];
-    isCreate = arguments['isCreate'];
-    
     return Scaffold(
       backgroundColor: ColorsConstants.orange,
       appBar: const AppBarWidget(

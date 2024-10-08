@@ -4,8 +4,10 @@ import 'package:famplay/domain/model/user/profile.dart';
 import 'package:famplay/domain/model/user/user_model.dart';
 import 'package:famplay/presenter/ui/constants/constants.dart';
 import 'package:famplay/presenter/ui/famplay_icon.dart';
+import 'package:famplay/presenter/ui/pages/son_register_page.dart';
 import 'package:famplay/presenter/ui/widget/app_bar_widget.dart';
 import 'package:famplay/presenter/ui/widget/son/son_tile.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -129,10 +131,13 @@ class _HomePageState extends State<HomePage> {
                     minimumSize: const Size.fromHeight(64),
                   ),
                   onPressed: () {
-                    Navigator.of(context)
-                        .pushNamed('/register/son', arguments: {
-                      'isCreate': true,
-                    });
+                    Navigator.of(context, rootNavigator: false).push(
+                      CupertinoPageRoute(
+                        builder: (context) => const SonRegisterPage(
+                          isCreate: true,
+                        ),
+                      ),
+                    );
                   },
                   child: Row(
                     children: [

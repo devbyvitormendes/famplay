@@ -13,20 +13,21 @@ import 'package:image_picker/image_picker.dart';
 import 'package:validatorless/validatorless.dart';
 
 class SonRegisterPage extends StatefulWidget {
-  const SonRegisterPage({super.key});
+  final bool isCreate;
+  const SonRegisterPage({super.key, required this.isCreate});
 
   @override
   State<SonRegisterPage> createState() => _SonRegisterPageState();
 }
 
 class _SonRegisterPageState extends State<SonRegisterPage> {
-  bool isCreate = true;
   final formKey = GlobalKey<FormState>();
   final nameEC = TextEditingController();
   final userEC = TextEditingController();
   final passwordEC = TextEditingController();
   File? picture;
   bool obscuredText = true;
+  bool isCreate = false;
 
   final List<String> _items = [];
   final StreamController<String> _controller =
@@ -35,6 +36,7 @@ class _SonRegisterPageState extends State<SonRegisterPage> {
   @override
   void initState() {
     super.initState();
+    isCreate = widget.isCreate;
     _controller.stream.listen((item) {
       setState(() {
         _items.add(item);
@@ -61,9 +63,6 @@ class _SonRegisterPageState extends State<SonRegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    final arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
-    isCreate = arguments['isCreate'];
-    
     return Scaffold(
       backgroundColor: ColorsConstants.orange,
       appBar: const AppBarWidget(

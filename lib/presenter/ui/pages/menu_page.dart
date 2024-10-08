@@ -39,7 +39,7 @@ class _MenuPageState extends State<MenuPage> {
           ),
           BottomNavigationBarItem(
             icon: FamplayIcons.premios,
-            label: 'Prósitos',
+            label: 'Prêmios',
           ),
           BottomNavigationBarItem(
             icon: FamplayIcons.validar,

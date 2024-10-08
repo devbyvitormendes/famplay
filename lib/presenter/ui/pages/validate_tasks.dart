@@ -61,62 +61,62 @@ class _ValidateTasksPageState extends State<ValidateTasksPage> {
       weekends: false,
       done: false,
     ),
-    // TaskModel(
-    //   id: 6,
-    //   description: 'Descrição da tarefa 6',
-    //   points: 10,
-    //   weekdays: true,
-    //   weekends: true,
-    //   done: true,
-    // ),
-    // TaskModel(
-    //   id: 1,
-    //   description: 'Descrição da tarefa 1',
-    //   points: 10,
-    //   weekdays: true,
-    //   weekends: false,
-    //   done: true,
-    // ),
-    // TaskModel(
-    //   id: 2,
-    //   description: 'Descrição da tarefa 2',
-    //   points: 10,
-    //   weekdays: true,
-    //   weekends: true,
-    //   done: false,
-    // ),
-    // TaskModel(
-    //   id: 3,
-    //   description: 'Descrição da tarefa 3',
-    //   points: 10,
-    //   weekdays: false,
-    //   weekends: false,
-    //   done: false,
-    // ),
-    // TaskModel(
-    //   id: 4,
-    //   description: 'Descrição da tarefa 4',
-    //   points: 10,
-    //   weekdays: false,
-    //   weekends: true,
-    //   done: true,
-    // ),
-    // TaskModel(
-    //   id: 5,
-    //   description: 'Descrição da tarefa 5',
-    //   points: 10,
-    //   weekdays: true,
-    //   weekends: false,
-    //   done: false,
-    // ),
-    // TaskModel(
-    //   id: 6,
-    //   description: 'Descrição da tarefa 6',
-    //   points: 10,
-    //   weekdays: true,
-    //   weekends: true,
-    //   done: true,
-    // ),
+    TaskModel(
+      id: 6,
+      description: 'Descrição da tarefa 6',
+      points: 10,
+      weekdays: true,
+      weekends: true,
+      done: true,
+    ),
+    TaskModel(
+      id: 1,
+      description: 'Descrição da tarefa 1',
+      points: 10,
+      weekdays: true,
+      weekends: false,
+      done: true,
+    ),
+    TaskModel(
+      id: 2,
+      description: 'Descrição da tarefa 2',
+      points: 10,
+      weekdays: true,
+      weekends: true,
+      done: false,
+    ),
+    TaskModel(
+      id: 3,
+      description: 'Descrição da tarefa 3',
+      points: 10,
+      weekdays: false,
+      weekends: false,
+      done: false,
+    ),
+    TaskModel(
+      id: 4,
+      description: 'Descrição da tarefa 4',
+      points: 10,
+      weekdays: false,
+      weekends: true,
+      done: true,
+    ),
+    TaskModel(
+      id: 5,
+      description: 'Descrição da tarefa 5',
+      points: 10,
+      weekdays: true,
+      weekends: false,
+      done: false,
+    ),
+    TaskModel(
+      id: 6,
+      description: 'Descrição da tarefa 6',
+      points: 10,
+      weekdays: true,
+      weekends: true,
+      done: true,
+    ),
   ];
 
   @override
@@ -151,6 +151,49 @@ class _ValidateTasksPageState extends State<ValidateTasksPage> {
       });
     }
   }
+
+  Future openDialog(TaskModel task) => showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          backgroundColor: ColorsConstants.white,
+          title: Text(
+            task.done
+                ? 'Quer marcar como não feita?'
+                : 'Quer marcar como feita?',
+            style: const TextStyle(
+              color: ColorsConstants.brown,
+              fontWeight: FontWeight.w900,
+              fontSize: 18,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text(
+                'Não',
+                style: TextStyle(
+                  color: ColorsConstants.orange,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 18,
+                ),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  task.done = !task.done;
+                });
+                Navigator.pop(context);
+              },
+              child: const Text(
+                'Sim',
+              ),
+            ),
+          ],
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -238,7 +281,7 @@ class _ValidateTasksPageState extends State<ValidateTasksPage> {
                 height: 10,
               ),
               const Text(
-                'Clique na tarefa para alterar o status',
+                'Clique no ícone para alterar o status da tarefa',
                 style: TextStyle(
                     fontFamily: FontConstants.fontFamily,
                     fontWeight: FontWeight.w900,
@@ -283,14 +326,12 @@ class _ValidateTasksPageState extends State<ValidateTasksPage> {
                                     ),
                                   ),
                                   IconButton(
+                                    onPressed: () => openDialog(task),
                                     iconSize: 14,
-                                    color: ColorsConstants.brown,
-                                    onPressed: () {
-                                      log('Validar tarefa: ${task.id}');
-                                    },
                                     icon: Icon(task.done
                                         ? FamplayIcons.success
                                         : FamplayIcons.undone),
+                                    color: ColorsConstants.brown,
                                   ),
                                 ],
                               ),

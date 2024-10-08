@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:famplay/domain/model/task/task_model.dart';
 import 'package:famplay/presenter/ui/constants/constants.dart';
 import 'package:famplay/presenter/ui/famplay_icon.dart';
+import 'package:famplay/presenter/ui/pages/task_register_page.dart';
 import 'package:famplay/presenter/ui/widget/app_bar_widget.dart';
 import 'package:famplay/presenter/ui/widget/task/task_tile.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TaskPage extends StatefulWidget {
@@ -124,10 +126,13 @@ class _TaskPageState extends State<TaskPage> {
                     minimumSize: const Size.fromHeight(64),
                   ),
                   onPressed: () {
-                    Navigator.of(context)
-                        .pushNamed('/register/task', arguments: {
-                      'isCreate': true,
-                    });
+                    Navigator.of(context, rootNavigator: false).push(
+                      CupertinoPageRoute(
+                        builder: (context) => const TaskRegisterPage(
+                          isCreate: true,
+                        ),
+                      ),
+                    );
                   },
                   child: Row(
                     children: [

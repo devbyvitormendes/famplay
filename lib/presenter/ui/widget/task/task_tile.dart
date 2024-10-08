@@ -16,7 +16,7 @@ class TaskTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        log('task: $task');
+        log('task: ${task.description}');
       },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,

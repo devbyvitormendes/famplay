@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:famplay/domain/model/prize/prize_model.dart';
 import 'package:famplay/presenter/ui/constants/constants.dart';
 import 'package:famplay/presenter/ui/famplay_icon.dart';
+import 'package:famplay/presenter/ui/pages/prize_register_page.dart';
 import 'package:famplay/presenter/ui/widget/app_bar_widget.dart';
 import 'package:famplay/presenter/ui/widget/prize/prize_tile.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
     
 class PrizePage extends StatefulWidget {
@@ -119,10 +121,13 @@ class _PrizePageState extends State<PrizePage> {
                     minimumSize: const Size.fromHeight(64),
                   ),
                   onPressed: () {
-                    Navigator.of(context)
-                        .pushNamed('/register/prize', arguments: {
-                      'isCreate': true,
-                    });
+                    Navigator.of(context, rootNavigator: false).push(
+                      CupertinoPageRoute(
+                        builder: (context) => const PrizeRegisterPage(
+                          isCreate: true,
+                        ),
+                      ),
+                    );
                   },
                   child: Row(
                     children: [

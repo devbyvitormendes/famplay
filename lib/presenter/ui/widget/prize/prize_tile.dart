@@ -16,7 +16,7 @@ class PrizeTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        log('prize: $prize');
+        log('prize: ${prize.description}');
       },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,

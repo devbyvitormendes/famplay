@@ -1,5 +1,7 @@
 import 'package:famplay/presenter/ui/constants/constants.dart';
 import 'package:famplay/presenter/ui/famplay_icon.dart';
+import 'package:famplay/presenter/ui/pages/login_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
@@ -75,8 +77,11 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 visible: showLogoff,
                 child: IconButton(
                   onPressed: () {
-                    //logout();
-                    Navigator.of(context).pushNamed('/auth/login');
+                    Navigator.of(context, rootNavigator: true).pushReplacement(
+                      CupertinoPageRoute(
+                        builder: (context) => const LoginPage(),
+                      ),
+                    );
                   },
                   icon: Icon(
                     FamplayIcons.logout,
